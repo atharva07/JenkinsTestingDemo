@@ -1,32 +1,42 @@
 package seleniumDemo;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
-@Test
-public class HandlingAlertDemo {
+public class ParametersExample {
 
-    public void handlingAlert() throws InterruptedException {
+    WebDriver driver;
 
-        System.setProperty("webdriver.chrome.driver", "D://server files//latest/chromedriver.exe");
+    @BeforeClass
+    @Parameters({"browser", "url"})
+    void setup(String browser, String app) {
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://rahulshettyacademy.com/AutomationPractice/");
-
+        if (browser.equalsIgnoreCase("chrome")) {
+            System.setProperty("webdriver.chrome.driver", "D://server files//latest/chromedriver.exe");
+            driver = new ChromeDriver();
+        } else {
+            System.out.println("Please enter chrome browser as parameter");
+        }
+        driver.get(app);
         driver.manage().window().maximize();
-        Thread.sleep(3000);
+    }
 
+    @Test(priority = 1)
+    void fillData() throws InterruptedException {
         driver.findElement(By.xpath("//input[@id='name']")).sendKeys("Atharva Hiwase");
         driver.findElement(By.xpath("//input[@id='alertbtn']")).click();
-
         Thread.sleep(5000);
+    }
 
-        // Alert example
+    @Test(priority = 2)
+    void alertMethod() throws InterruptedException {
         Alert alert = driver.switchTo().alert();
         String alertMessage = driver.switchTo().alert().getText();
 
@@ -44,7 +54,6 @@ public class HandlingAlertDemo {
         action.moveToElement(element).perform();
 
         System.out.println("Mouse hover successfull");
-
         Thread.sleep(4000);
         driver.close();
     }
