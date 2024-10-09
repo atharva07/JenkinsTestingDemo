@@ -2,7 +2,6 @@ package seleniumDemo;
 
 import java.util.Iterator;
 import java.util.Set;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -13,7 +12,7 @@ public class WindowHandlingMethod {
 
         System.setProperty("webdriver.chrome.driver", "D://server files//latest/chromedriver.exe");
         WebDriver driver = new ChromeDriver();
-        driver.get("http://www.naukri.com/");
+        driver.get("https://www.naukri.com/");
         driver.manage().window().maximize();
         String parent = driver.getWindowHandle();
         driver.findElement(By.xpath("//span[@class='acceptance-btn-text']")).click();
