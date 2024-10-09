@@ -5,17 +5,30 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.Alert;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-@Test
+
 public class HandlingAlertDemo {
 
-    public void handlingAlert() throws InterruptedException {
+    @Parameters("Browser")
+    @Test
+    public void handlingAlert(String browserName) throws InterruptedException {
 
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        System.out.println("Parameter value is = " + browserName);
+        WebDriver driver = null;
+
+        if (browserName.contains("Chrome")) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+        } else if(browserName.contains("Edge")) {
+            WebDriverManager.edgedriver().setup();
+            driver = new EdgeDriver();
+        }
+
         driver.get("https://rahulshettyacademy.com/AutomationPractice/");
 
         driver.manage().window().maximize();
