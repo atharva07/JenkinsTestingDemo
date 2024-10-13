@@ -18,6 +18,7 @@ public class HandlingAlertDemo {
     @Test
     public void handlingAlert(String browserName) throws InterruptedException {
 
+        // Webhooks are added successfully and needed to be tested with jenkins
         System.out.println("Parameter value is = " + browserName);
         WebDriver driver = null;
 
